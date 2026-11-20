@@ -307,6 +307,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .vid .pl::before{content:"";border-block:12px solid transparent;border-left:19px solid var(--jet);margin-left:6px}
 .vid:hover .pl{transform:scale(1.12)}
 .vid .du{position:absolute;z-index:2;right:10px;bottom:10px;background:rgba(10,10,16,.85);font-weight:700;font-size:.78rem;padding:2px 8px;border-radius:4px}
+.mdwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,clamp(260px,26vw,340px));gap:18px;padding:12px;align-items:center}
+.mdtext{display:grid;gap:14px;align-content:center;padding:6px 8px}
+.mdtext .tg{justify-self:start;font-weight:800;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:var(--violet);color:#fff;padding:3px 8px;border-radius:4px}
+.mdtext h3{margin:0;font-family:var(--toon);font-weight:400;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;color:var(--cold);letter-spacing:.01em}
+.vid.md{aspect-ratio:var(--ar,9/16);justify-self:end;width:100%}
+.mwin:has(video.land){width:min(900px,100%)}
+.mwin video.land{width:100%;height:auto;max-height:72vh}
 .nightwrap{display:grid;grid-template-columns:minmax(0,clamp(260px,26vw,340px)) minmax(0,1fr);gap:8px;padding:6px;align-items:start}
 .nightwrap .mood.night{padding:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:auto}
 .nightwrap .mood.night button{grid-column:auto;grid-row:auto;aspect-ratio:16/9}
@@ -316,6 +323,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* responsivo */
 @media (max-width:960px){
   .nightwrap{grid-template-columns:minmax(0,1fr)}
+  .mdwrap{grid-template-columns:minmax(0,1fr)}
+  .vid.md{order:-1;justify-self:center;width:min(100%,340px)}
   .vid{width:min(100%,340px);justify-self:center}
   .head{grid-template-columns:auto minmax(0,1fr)}
   .head .by{display:none}
@@ -462,6 +471,23 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </section>
 
+<section class="win" id="matchday" data-bg="4" aria-labelledby="h-md">
+  <div class="bar"><h2 id="h-md">Match day</h2><span class="dots"><i></i><i></i><i></i></span></div>
+  <div class="mdwrap">
+    <div class="mdtext">
+      <span class="tg">Exemplo real</span>
+      <h3>Dia de jogo, do jeito 4Content</h3>
+      <p class="lead">O mesmo olhar da Gabilândia aplicado a um jogo de verdade. Este é o match day do Gabigol para <b>Coritiba × Santos</b>, feito para a quarta-feira, 18/11.</p>
+      <dl class="fi">
+        <div><dt>Formato</dt><dd>Vídeo de match day</dd></div>
+        <div><dt>Jogo</dt><dd>Coritiba × Santos · 18/11</dd></div>
+        <div class="wd"><dt>Por que está aqui</dt><dd>Mostra como a linguagem do universo vira conteúdo de campo, para os dias de jogo da série.</dd></div>
+      </dl>
+    </div>
+    <button class="vid md" type="button" id="mdMain" aria-label="Assistir ao match day"><img src="https://res.cloudinary.com/pjqox6al/video/upload/so_3,w_720,q_auto/4com_Gabi_CoritibaVSantos_18_11.jpg" alt="Match day do Gabigol, Coritiba contra Santos" loading="lazy"><span class="pl"></span></button>
+  </div>
+</section>
+
 <section class="win" data-bg="3" aria-labelledby="h-arte">
   <div class="bar"><h2 id="h-arte">Desenho de TV, luz de cinema</h2><span class="sm">Direção de arte</span></div>
   <div class="body">
@@ -597,7 +623,7 @@ $$('[data-split]').forEach(el=>{const t=el.textContent,tilt=el.hasAttribute('dat
 const modal=$('#modal'),mStage=$('#mStage');let MS=[],mi=0,lastF=null;
 document.body.appendChild(modal);
 function render(){const it=MS[mi];$('#mTitle').textContent=it.title||'';$('#mH').textContent=it.h||'';$('#mP').textContent=it.p||'';
-  mStage.innerHTML=it.video?`<video${it.v?' class="v"':''} src="${it.video}" poster="${it.poster}" controls autoplay playsinline></video>`:`<img src="${it.src}" alt="${esc(it.h||'')}">`;
+  mStage.innerHTML=it.video?`<video${it.land?' class="land"':it.v?' class="v"':''} src="${it.video}" poster="${it.poster}" controls autoplay playsinline></video>`:`<img src="${it.src}" alt="${esc(it.h||'')}">`;
   $('#mPrev').hidden=$('#mNext').hidden=MS.length<2;
   const v=mStage.querySelector('video');if(v)v.play().catch(()=>{})}
 function openM(list,i){MS=list;mi=i;lastF=document.activeElement;render();modal.hidden=false;document.documentElement.style.overflow='hidden';$('#mX').focus({preventScroll:true})}
@@ -613,6 +639,13 @@ function tile(src,cls,label){const b=document.createElement('button');b.type='bu
 /* episódios */
 const EP1={video:'https://res.cloudinary.com/pjqox6al/video/upload/ep1.mp4',poster:'https://res.cloudinary.com/pjqox6al/video/upload/so_3.6,w_720,q_auto/ep1.jpg',v:true,title:'Depois do apito',h:'Gabigolzinho · 0:10',p:''};
 $('#epMain').addEventListener('click',()=>openM([EP1],0));
+
+/* match day */
+const MD={video:'https://res.cloudinary.com/pjqox6al/video/upload/4com_Gabi_CoritibaVSantos_18_11.mp4',poster:'https://res.cloudinary.com/pjqox6al/video/upload/so_3,w_720,q_auto/4com_Gabi_CoritibaVSantos_18_11.jpg',v:true,title:'Match day',h:'Gabigol · Coritiba × Santos',p:'18/11'};
+(function(){const b=$('#mdMain'),im=b.querySelector('img');
+  const fit=()=>{if(!im.naturalWidth)return;const ar=im.naturalWidth/im.naturalHeight;b.style.setProperty('--ar',ar);MD.v=ar<1;MD.land=ar>=1};
+  im.addEventListener('load',fit);if(im.complete)fit();
+  b.addEventListener('click',()=>openM([MD],0))})();
 
 /* a dupla: moodboard */
 const DN=[15,14,13,16];
