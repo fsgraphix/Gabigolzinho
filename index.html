@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Gabilândia</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Gabilândia: série animada 2D, projeto piloto 4Content × Gabigol. Futebol, trap e música num universo noturno, com Gabigolzinho e Fabinho.">
+<meta name="description" content="Gabilândia: série animada 2D, projeto piloto 4Content × Gabigol. Futebol, trap e música num universo noturno, com Gabigolzinho, Fabinho e Mat.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,700;1,9..40,800&display=swap">
@@ -78,6 +78,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lt{font-family:var(--toon);font-weight:400;line-height:.9;color:var(--cold);-webkit-text-stroke:.085em var(--jet);paint-order:stroke fill;
   text-shadow:.035em .035em 0 var(--steel),.07em .07em 0 var(--violet),.1em .1em 0 var(--jet),.12em .12em 0 var(--jet)}
 .lt .l{display:inline-block;transform-origin:50% 85%;transition:transform .3s var(--bounce)}
+.lt .l.cI{scale:1 .84;transform-origin:50% 0}
 .lt .l:hover{transform:translateY(-.14em) rotate(var(--hr,-8deg)) scale(1.1)!important}
 
 /* ---------- topo do portal ---------- */
@@ -97,7 +98,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .head .by img{height:16px;width:auto;filter:brightness(0) saturate(100%) invert(16%) sepia(18%) saturate(1500%) hue-rotate(195deg)}
 
 /* ---------- capa ---------- */
-.hero{position:relative;border:2px solid var(--jet);border-radius:10px;overflow:hidden;aspect-ratio:16/8.4;background:var(--jet);container-type:inline-size}
+.hero{position:relative;border:2px solid var(--jet);border-radius:10px;overflow:hidden;aspect-ratio:16/8.9;background:var(--jet);container-type:inline-size}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,16,.15),transparent 30%,transparent 52%,rgba(16,10,38,.92) 92%)}
 .hero .copy{position:absolute;inset:auto 0 0;z-index:2;display:grid;justify-items:center;text-align:center;gap:10px;padding:0 14px 26px}
@@ -326,8 +327,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:680px){
   .head{grid-template-columns:minmax(0,1fr)}
   .tabs{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding-top:6px}
-  .hero{aspect-ratio:4/4.6}
-  .hero>img{object-position:55% 40%}
+  .hero{aspect-ratio:4/3.6}
+  .hero>img{object-position:50% 40%}
   .logo{font-size:12.4cqi}
   .duo2{grid-template-columns:minmax(0,1fr)}
   .eps{grid-template-columns:minmax(0,1fr)}
@@ -376,7 +377,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </header>
 
   <section class="hero" aria-label="Capa">
-    <img src="https://res.cloudinary.com/pjqox6al/image/upload/n15.webp" alt="Gabigolzinho e Fabinho disputando no fliperama, luz neon azul e rosa" fetchpriority="high">
+    <img src="https://res.cloudinary.com/pjqox6al/image/upload/f_auto,q_auto,w_2000/21" alt="Mat, Gabigolzinho e Fabinho no fliperama à noite, entre fliperamas de neon rosa e azul" fetchpriority="high">
     <div class="burst"><span>PILOTO<br>2026</span></div>
     <div class="copy">
       <span class="sub">Apresentando</span>
@@ -589,7 +590,7 @@ const ROT=[-6,4,-3,7,-5,3,-8,5,-2,6,-4,3],SC=[1,.94,1.06,.97,1.04,.93,1.02,.98,1
 $$('[data-split]').forEach(el=>{const t=el.textContent,tilt=el.hasAttribute('data-tilt');el.textContent='';let k=0;
   t.split(/(\s+)/).forEach(w=>{if(/^\s+$/.test(w)){el.appendChild(document.createTextNode(' '));return}
     const ws=document.createElement('span');ws.style.display='inline-block';ws.style.whiteSpace='nowrap';ws.setAttribute('aria-hidden','true');
-    [...w].forEach(ch=>{const s=document.createElement('span');s.className='l';s.textContent=ch;const r=ROT[k%12];if(tilt)s.style.transform=`rotate(${r}deg) scale(${SC[k%12]})`;s.style.setProperty('--hr',(r>0?-1:1)*10+'deg');k++;ws.appendChild(s)});
+    [...w].forEach(ch=>{const s=document.createElement('span');s.className='l'+(ch==='I'?' cI':'');s.textContent=ch;const r=ROT[k%12];if(tilt)s.style.transform=`rotate(${r}deg) scale(${SC[k%12]})`;s.style.setProperty('--hr',(r>0?-1:1)*10+'deg');k++;ws.appendChild(s)});
     el.appendChild(ws)})});
 
 /* popup (vídeo ou imagem): fundo escuro com desfoque */
